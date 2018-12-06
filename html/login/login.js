@@ -1,6 +1,7 @@
 /*by zhuhy*/
 summerready = function() {
 		initPage();
+		//polilion();
 }
 //判断是否存在json的key
 function objIsEmpty(obj) {
@@ -81,7 +82,7 @@ function initPage() {
 								}
 						},
 						goMenu : function(tag) {
-								roads.openWinSpecial("menu", "menu", "menu.html", {
+								roads.openWin("scanner", "procureScanner", "procureScanner/procureScanner.html", {
 										"dept" : tag,
 										"usrname" : this.usrname
 								});
@@ -93,6 +94,7 @@ function initPage() {
 						},
 						// 提交表单
 						login : function() {
+								vue.loginStatus = 1;
 								//记住密码逻辑
 								summer.setStorage('remeberPD', this.remeberPD);
 								if (this.remeberPD) {
@@ -203,7 +205,60 @@ function initPage() {
 						})
 				}
 		})
+		var tmax_opts = {
+				delay : 0.5,
+				repeat : -1,
+				repeatDelay : 0.5,
+				yoyo : true
+		};
+
+		var tmax_tl = new TimelineMax(tmax_opts),
+		    polylion_shapes = $('svg.polylion > g polygon'),
+		    polylion_stagger = 0.00475,
+		    polylion_duration = 1.5;
+
+		var polylion_staggerFrom = {
+				scale : 0,
+				opacity : 0,
+				transformOrigin : 'center center',
+		};
+
+		var polylion_staggerTo = {
+				opacity : 1,
+				scale : 1,
+				ease : Elastic.easeInOut
+		};
+
+		tmax_tl.staggerFromTo(polylion_shapes, polylion_duration, polylion_staggerFrom, polylion_staggerTo, polylion_stagger, 0);
 		document.addEventListener("deviceready", vue.fillPage(), false);
+}
+
+function polilion() {
+		var tmax_opts = {
+				delay : 0.5,
+				repeat : -1,
+				repeatDelay : 0.5,
+				yoyo : true
+		};
+
+		var tmax_tl = new TimelineMax(tmax_opts),
+		    polylion_shapes = $('svg.polylion > g polygon'),
+		    polylion_stagger = 0.00475,
+		    polylion_duration = 1.5;
+
+		var polylion_staggerFrom = {
+				scale : 0,
+				opacity : 0,
+				transformOrigin : 'center center',
+		};
+
+		var polylion_staggerTo = {
+				opacity : 1,
+				scale : 1,
+				ease : Elastic.easeInOut
+		};
+
+		tmax_tl.staggerFromTo(polylion_shapes, polylion_duration, polylion_staggerFrom, polylion_staggerTo, polylion_stagger, 0);
 }
 
 // reference to last opened menu

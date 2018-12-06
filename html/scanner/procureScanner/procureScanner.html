@@ -1,103 +1,288 @@
-<!--by zhy-->
 <!DOCTYPE html>
 <html>
 		<head>
 				<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
 				<meta charset="UTF-8">
 				<title></title>
-				<link rel="stylesheet" href="../../css/iuapmobile.um.css">
-				<link rel="stylesheet" href="../../css/mintui.css" />
-				<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_913882_dfgp2uj2ulh.css">
-				<link rel="stylesheet" href="../util/util.css">
+				<link rel="stylesheet" href="../../../css/iuapmobile.um.css">
+				<link rel="stylesheet" href="../../../css/mintui.css" />
+				<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_913882_c8t3blrxrev.css">
+				<link rel="stylesheet" href="../../util/util.css">
 				<link rel="stylesheet" href="procureScanner.css">
 
-				<script type="text/javascript" src="../../js/jquery.min.js" ></script>
-				<script type="text/javascript" src="../../js/summer.js" ></script>
-				<script type="text/javascript" src="../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
-				<script type="text/javascript" src="../../js/vue.js"></script>
-				<script type="text/javascript" src="../../js/mintui.js"></script>
-				<script type="text/javascript" src="../util/util.js" ></script>
-				<script type="text/javascript" src="../util/lang/lang.js" ></script>
+				<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
+				<script type="text/javascript" src="../../../js/summer.js" ></script>
+				<script type="text/javascript" src="../../../js/Frameworks/iuapmobile.frameworks.ui.js" ></script>
+				<script type="text/javascript" src="../../../js/vue.js"></script>
+				<script type="text/javascript" src="../../../js/mintui.js"></script>
+				<script type="text/javascript" src="../../util/util.js" ></script>
+				<script type="text/javascript" src="../../util/lang/lang.js" ></script>
 				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.min.js"></script>
-				<script type="text/javascript" src="../../js/her.min.js" ></script>
+				<script type="text/javascript" src="../../../js/her.min.js" ></script>
 				<script type="text/javascript" src="procureScanner.js"></script>
 		</head>
 		<body>
-				<div class="um-win" id="index">
-						<div class="login-mask"></div>
-						<div id="main" class="um-content p15 um-box-center um-row">
-								<div class="login-panel" v-if="loginStatus==0">
-										<div class="ultra-tab-bar">
-												<div class="ultra-tab left" :class="lang==1?'active':''" @click="lang=1">
-														中&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文
+				<div class="loadingLayer"></div>
+				<div id="audioHost">
+						<audio id="audioCode"></audio>
+				</div>
+				<div class="um-win" id="index" :class=module_id>
+						<div class="um-header header-bg">
+								<a href="#" class="um-back" @click="goback"></a>
+								<h3 class="title-color" v-text=module_id @click="secretDoor(4)" style="pointer-events: all;"></h3>
+								<div class="um-header-btns"></div>
+						</div>
+
+						<div class="um-content">
+								<div class="toggleSection" v-if="!toggleStatus">
+										<div class="col-section section-one">
+												<div class="query-kit">
+														<div class="um-label um-box-justify">
+																<div class="label-title" v-text="langFunk('plateNum')"></div>
+																<div class="label-content">
+																		<input id="plateNum" type="text" v-model="plateNum"/>
+																</div>
+														</div>
+
+														<div class="um-label um-box-justify">
+																<div class="label-title" v-text="langFunk('cardNum')"></div>
+																<div class="label-content">
+																		<input id="cardNum" type="number" v-model="cardNum" :placeholder="langFunk('cardNumGuide')"/>
+																</div>
+														</div>
+														<button type="button" class="ultra-btn query " @click="letscan()" v-text="langFunk('bandText')" style="right: 10px"></button>
 												</div>
-												<div class="ultra-tab right" :class="lang==1?'':'active'" @click="lang=0">
-														ENGLISH
+
+												<div class="um-label um-box-justify" style="border-top: 1px solid #f3f3f3;">
+														<div class="label-title" v-text="langFunk('grossWeight')"></div>
+														<div class="label-content">
+																<input id="grossWeight" type="number" @click="getGrossWeight()" v-model="grossWeight" readonly=""/>
+																<button type="button" class="ultra-btn query " @click="getGrossWeight()" v-text="langFunk('obtain')"></button>
+														</div>
 												</div>
-										</div>
-										<div class="login-form">
-												<div class="panel-title" @click="secretDoor(3)" v-text="langFunk('redLionScan')"></div>
 
 												<div class="um-label um-box-justify">
-														<div class="label-title" v-text="langFunk('usernameLabel')"></div>
+														<div class="label-title" v-text="langFunk('splrNetWeight')"></div>
 														<div class="label-content">
-																<input id="usrname" type="text" v-model="usrname" placeholder="" disabled="" @click="selectUsrname()"/>
+																<input id="splrNetWeight" type="number" v-model="splrNetWeight"/>
+														</div>
+												</div>
+										</div>
 
-																<div class="pen-outer">
-																		<div class="pulldown">
-																				<div class="pulldown-toggle pulldown-toggle-round">
-																						<div class="lines"></div>
-																				</div>
-																				<div class="pulldown-menu">
-																						<div class="userList">
-																								<div class="user-item ultra-list-item" @click="userItemClick(index)" v-for="(item, index) in userList">
-																										<div class="user-item-inner" v-text="item.username"></div>
-																								</div>
-																						</div>
-																				</div>
-																		</div>
+										<div class="col-section section-two">
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('procOrder')"></div>
+														<div class="label-content">
+																<input id="procOrder" type="text" v-model="procOrder" readonly="" @click="goSelector(0)"/>
+																<button type="button" class="ultra-btn query" v-text="langFunk('select')" @click="goSelector(0)"></button>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('allotAuto')"></div>
+														<div class="label-content">
+																<input id="allotAuto" type="text" v-model="allotAuto" readonly="" @click="goSelector(1)"/>
+																<button type="button" class="ultra-btn query" v-text="langFunk('select')" @click="goSelector(1)"></button>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('material')"></div>
+														<div class="label-content">
+																<input id="material" type="text" v-model="material" readonly=""/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('supplier')"></div>
+														<div class="label-content">
+																<input id="supplier" type="text" v-model="supplier" readonly=""/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('logCo')"></div>
+														<div class="label-content">
+																<input id="logCo" type="text" v-model="logCo" readonly=""/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('mineLocation')"></div>
+														<div class="label-content">
+																<input id="mineLocation" type="text" v-model="mineLocation" readonly=""/>
+														</div>
+												</div>
+										</div>
+
+										<div class="col-section section-three" style="margin-bottom: 70px;">
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('productLine')"></div>
+														<div class="label-content">
+																<input type="text" @click="popupVisible = true" readonly v-model="productLine" />
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('packPass')"></div>
+														<div class="label-content">
+																<label class="um-check-inline mr70">
+																		<input name="shift-group-packPass" type="radio" value="0" v-model="packPass">
+																		<span class="db ml5" v-text="langFunk('yes')"></span> <span class="um-icon-checkbox um-css3-vc"></span> </label>
+																<label class="um-check-inline">
+																		<input name="shift-group-packPass" type="radio" value="1" v-model="packPass">
+																		<span class="db ml5" v-text="langFunk('no')"></span> <span class="um-icon-checkbox um-css3-vc"></span> </label>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('subsidy')"></div>
+														<div class="label-content">
+																<label class="um-check-inline mr70">
+																		<input name="shift-group-subsidy" type="radio" value="0" v-model="subsidy">
+																		<span class="db ml5" v-text="langFunk('yes')">是 </span> <span class="um-icon-checkbox um-css3-vc"></span> </label>
+																<label class="um-check-inline">
+																		<input name="shift-group-subsidy" type="radio" value="1" v-model="subsidy">
+																		<span class="db ml5" v-text="langFunk('no')">否 </span> <span class="um-icon-checkbox um-css3-vc"></span> </label>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('clasp')"></div>
+														<div class="label-content">
+																<input id="clasp" type="number" v-model="clasp"/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('buyerNum')"></div>
+														<div class="label-content">
+																<input id="buyerNum" type="number" v-model="buyerNum"/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('sealNumber')"></div>
+														<div class="label-content">
+																<input id="sealNumber" type="text" v-model="sealNumber"/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('sealColor')"></div>
+														<div class="label-content">
+																<input id="sealColor" type="text" v-model="sealColor"/>
+														</div>
+												</div>
+										</div>
+								</div>
+
+								<div class="toggleSection" v-if="toggleStatus">
+										<div class="query-kit fixed">
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('evenTime')"></div>
+														<div class="ultra-range label-content">
+																<input type="text" class="double-percent" @click="open('picker-date-begin')" v-model="beginDate" readonly>
+																<div class="middel-text" v-text="langFunk('to')"></div>
+																<input type="text" class="double-percent" @click="open('picker-date-stop')" v-model="stopDate" readonly>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('checkMaterial')"></div>
+														<div class="label-content">
+																<input id="material" type="text" v-model="checkMaterial" readonly="" @click="goItemSelector(0)"/>
+														</div>
+												</div>
+
+												<div class="um-label um-box-justify">
+														<div class="label-title" v-text="langFunk('supplier')"></div>
+														<div class="label-content">
+																<input id="supplier" type="text" v-model="supplier" readonly="" @click="goItemSelector(1)"/>
+														</div>
+												</div>
+
+												<div class="ultra-btn two-in-row restore" @click="reset()">
+														<div class="icon iconfont icon-refresh icon-onbtn"></div>
+														{{langFunk('reset')}}
+												</div>
+
+												<div class="ultra-btn two-in-row query" @click="query()">
+														<div class="icon iconfont icon-query icon-onbtn"></div>
+														{{langFunk('queryText')}}
+												</div>
+										</div>
+
+										<div class="gap" style="height: 195px;"></div>
+
+										<div class="log-item">
+												<div class="ultra-list-item" @click="" v-for="(item, index) in logList">
+														<div class="log-item-inner">
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("orderId")+": "+item.vsourcebillcode'></div >
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("checkTime")+": "+item.dbizdate'></div >
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("supplier")+": "+item.supplier'></div >
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("date")+": "+item.dbizdate'></div ><div class="log-item-content" v-text='langFunk("plateNum")+": "+item.vvehicle'></div>
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("grossWeight")+": "+item.ngross'></div ><div class="log-item-content" v-text='langFunk("netWeight")+": "+item.nnet'></div>
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("clasp")+": "+item.nabatebright'></div ><div class="log-item-content" v-text='langFunk("tareWeight")+": "+item.ntare'></div>
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("material")+": "+item.material'></div ><div class="log-item-content" v-text='langFunk("splrNetWeight")+": "+item.supplierweight'></div>
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("logCo")+": "+item.org'></div >
+																</div>
+																<div class="log-item-row">
+																		<div class="log-item-content" v-text='langFunk("mineLocation")+": "+item.mine'></div >
 																</div>
 														</div>
 												</div>
+										</div>
 
-												<div class="um-label um-box-justify">
-														<div class="label-title" v-text="langFunk('passwordLabel')"></div>
-														<div class="label-content">
-																<input id="password" :type="showPD ? 'text' : 'password'" v-model="password" placeholder=" "/>
-																<div :class=" 'icon iconfont icon-' + ((showPD) ? 'eye' : 'closeye') " @touchstart="showPD= true" @touchend="showPD= false" @touchmove="showPD= false"></div>
-														</div>
+										<div class="overall-bar" v-if="!inputStatus">
+												<div class="log-item-row">
+														<div class="log-item-content" v-text='langFunk("carAmount")+": "+carAmount'></div ><div class="log-item-content" v-text='langFunk("clasp")+": "+ovClasp'></div ><div class="log-item-content" v-text='langFunk("netWeight")+": "+ovNetWeight'></div >
 												</div>
-
-												<div class="remeberPD">
-														{{langFunk('remeberPDLabel')}}
-														<input class="remember-checkbox" type="checkbox" v-model="remeberPD">
-												</div>
-
-												<div class="btn-group">
-														<div class="ultra-btn ip-btn left" @click="ipWIndowToggle=true" v-if="serverShow">
-																<div class="icon iconfont icon-ip"></div>
-																{{langFunk('serverBtnText')}}
-														</div>
-														<div :class=" 'ultra-btn login-btn' +( (serverShow) ? ' right' : '' ) " @click="login()">
-																<div class="icon iconfont icon-login"></div>
-																{{langFunk('loginBtnText')}}
-														</div>
+												<div class="log-item-row">
+														<div class="log-item-content" v-text='langFunk("grossWeight")+": "+ovGrossWeight'></div ><div class="log-item-content" v-text='langFunk("tareWeight")+": "+ovTareWeight'></div >
 												</div>
 										</div>
 								</div>
-								<div class="WindowWrapper" v-if="ipWIndowToggle">
-										<div class="ipWindow">
-												{{langFunk('ipInputGuideText')}}
-												<div class="inputWrapper">
-														<input  v-model="ipLocationInput" type="text" placeholder=" " class="ipLocationInput"/>
-														<div class="icon iconfont icon-close" @click="ipLocationInput=''"></div>
-												</div>
-												<div class="btn-group">
-														<div class="ultra-btn ip-btn left" @click="ipWIndowToggle=false;ipLocation=ipLocationInput" v-text="langFunk('confirmBtntext')"></div>
-														<div class="ultra-btn ip-btn right" @click="ipWIndowToggle=false;ipLocationInput=ipLocation" v-text="langFunk('cancelBtntext')"></div>
-												</div>
+
+								<div class="ultra-bottom-btns" v-if="!inputStatus">
+										<div class="ultra-bottom-btn" :class="(!toggleStatus?'active':'')" @click="ultraToggle(0)">
+												<div class="icon iconfont icon-procMgmt"></div>
+												<div v-text="langFunk('procureReceive')"></div>
+										</div>
+										<div class="ultra-bottom-btn" :class="(toggleStatus?'active':'')" @click="ultraToggle(1)">
+												<div class="icon iconfont icon-query"></div>
+												<div v-text="langFunk('receiveQuery')"></div>
 										</div>
 								</div>
+
+								<!--起始日期下拉选择控件-->
+								<mt-datetime-picker ref="picker-date-begin" type="date" :visible-item-count="5" :confirm-text='langFunk("confirmBtntext")' :cancel-text='langFunk("cancelBtntext")' @confirm="handleDateConfirm('begin',$event)" v-model="beignDatePickerValue"></mt-datetime-picker>
+
+								<!--结束下拉选择控件-->
+								<mt-datetime-picker ref="picker-date-stop" type="date" :visible-item-count="5" :confirm-text='langFunk("confirmBtntext")' :cancel-text='langFunk("cancelBtntext")' @confirm="handleDateConfirm('stop',$event)" v-model="stopDatePickerValue"></mt-datetime-picker>
+
+								<!--生产线下拉选择控件-->
+								<mt-popup v-model="popupVisible" position="bottom">
+										<mt-picker :slots="productLines" :show-toolbar=true value-key="text" @change="onValueChange" :visible-item-count="3" ref="picker">
+												<span @click="popupVisible= false" class="custom-toolbar-btn cancel-btn" v-text='langFunk("cancelBtntext")'></span>
+												<span @click="confirmChange" class="custom-toolbar-btn confirm-btn" v-text='langFunk("confirmBtntext")'></span>
+										</mt-picker>
+								</mt-popup>
 						</div>
 				</div>
 		</body>
