@@ -99,7 +99,7 @@
 										</div>
 								</div>
 
-								<div class="ultra-bottom-btns">
+								<div class="ultra-bottom-btns" v-if="!inputStatus">
 										<div class="ultra-bottom-btn" @click="letscan()">
 												<div class="icon iconfont icon-scan"></div>
 												<div v-text="langFunk('scan')"></div>

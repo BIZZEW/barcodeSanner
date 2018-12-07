@@ -27,6 +27,7 @@ function initPage() {
 				data : {
 						/*public??*/
 						baseUrl : "http://172.16.14.212:8088/uapws/service/nc.itf.app.webservice.IPurchaseAppWebService/",
+						inputStatus : 0,
 						turn : 0,
 						dept : summer.pageParam.dept,
 						module_id : summer.pageParam.module_id,
