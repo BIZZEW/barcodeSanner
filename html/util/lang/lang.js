@@ -133,7 +133,7 @@ window.lang = (function(win, l) {
 				"pluralGrossWeight" : "Plural G. Weight",
 		}, {
 				/*login*/
-				"redLionScan" : "红狮扫单",
+				"redLionScan" : "红狮扫单管理系统",
 				"redLionSaleMS" : "红狮销售管理系统",
 				"redLionProcureMS" : "红狮采购管理系统",
 				"usernameLabel" : "用\xa0户\xa0名",
