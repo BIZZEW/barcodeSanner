@@ -154,6 +154,7 @@ input:focus, textarea:focus, select:focus {
 .um-label .label-content textarea, .um-label .label-content input {
 	height: 25px;
 	width: 75%;
+	font-size: 15px;
 }
 
 .icon-eye, .icon-closeye, .icon-pulldown {

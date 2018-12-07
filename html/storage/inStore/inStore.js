@@ -27,9 +27,6 @@ function initPage() {
 				data : {
 						/*public??*/
 						baseUrl : "http://172.16.14.212:8088/uapws/service/nc.itf.app.webservice.IPurchaseAppWebService/",
-						inputStatus : 0,
-						toggleStatus : 0,
-						bandShow : false,
 						turn : 0,
 						dept : summer.pageParam.dept,
 						module_id : summer.pageParam.module_id,
@@ -37,54 +34,55 @@ function initPage() {
 						record_id : parseInt(summer.pageParam.record_id),
 
 						/*procureReceive*/
-						plateNum : "",
-						cardNum : "",
-						grossWeight : "",
-						splrNetWeight : "",
-						procOrder : "",
-						allotAuto : "",
-						material : "",
+						procureReceipt : "",
+						procureStaff : "",
+						procureOrg : "",
+						procureDept : "",
+						warehouse : "",
 						supplier : "",
-						logCo : "",
-						mineLocation : "",
-						popupVisible : false,
-						productLine : "",
-						productLines : [{
-								values : [{
-										"text" : "一线"
-								}, {
-										"text" : "二线"
-								}, {
-										"text" : "三线"
-								}]
-						}],
-						packPass : 1,
-						subsidy : 1,
-						clasp : "",
-						buyerNum : "",
-						sealNumber : "",
-						sealColor : "",
-
-						/*receiveQuery*/
-						beginDate : "",
-						stopDate : "",
-						//起始日期
-						beginDate : new Date().format("yyyy-MM-dd"),
-						beignDatePickerValue : new Date(),
-						//结束日期
-						stopDate : new Date().format("yyyy-MM-dd"),
-						stopDatePickerValue : new Date(),
-						checkMaterial : "",
-						materialId : "",
-						supplier : "",
-						supplierId : "",
-						logList : [],
-						/*overall data*/
-						carAmount : "",
-						ovClasp : "",
-						ovNetWeight : "",
-						ovGrossWeight : "",
-						ovTareWeight : ""
+						scanResult : [{
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}, {
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}, {
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}, {
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}, {
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}, {
+								"goodId" : "45678",
+								"amount" : "45678",
+								"goodName" : "45678",
+								"price" : "45678",
+								"goodType" : "45678",
+								"sum" : "45678",
+						}]
 				},
 				methods : {
 						letscan : function() {
@@ -94,6 +92,8 @@ function initPage() {
 								}, function(error) {
 										alert("Scanning failed: " + error);
 								});
+						},
+						deletee : function() {
 						},
 						exitApp : function(param) {
 								UM.confirm({

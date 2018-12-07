@@ -288,8 +288,17 @@ window.lang = (function(win, l) {
 				"searchWord" : "搜\xa0索\xa0词",
 				"pluralGrossWeight" : "复\xa0毛\xa0重",
 
-				/*procureScanner*/
+				/*storage*/
 				"scan" : "扫\xa0\xa0\xa0\xa0\xa0\xa0描",
+				"delete" : "删\xa0\xa0\xa0\xa0\xa0\xa0除",
+				"procureReceipt" : "采购单据",
+				"procureStaff" : "采购人员",
+				"procureOrg" : "采购组织",
+				"procureDept" : "采购部门",
+				"warehouse" : "仓\xa0\xa0\xa0\xa0\xa0\xa0库",
+				"goodId" : "商品编号",
+				"price" : "单价",
+				"goodType" : "商品类型",
 		}];
 
 		l.getStr = function(langCode, strTag) {
