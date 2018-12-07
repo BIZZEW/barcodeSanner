@@ -133,7 +133,7 @@ window.lang = (function(win, l) {
 				"pluralGrossWeight" : "Plural G. Weight",
 		}, {
 				/*login*/
-				"redLionScan" : "红狮扫单管理系统",
+				"redLionStoreMS" : "红狮库管系统",
 				"redLionSaleMS" : "红狮销售管理系统",
 				"redLionProcureMS" : "红狮采购管理系统",
 				"usernameLabel" : "用\xa0户\xa0名",
@@ -145,11 +145,14 @@ window.lang = (function(win, l) {
 				"confirmBtntext" : "确\xa0\xa0\xa0定",
 				"cancelBtntext" : "取\xa0\xa0\xa0消",
 				/*menu*/
-				"scanner" : {
-						"showName" : "红狮销售管理系统",
+				"storage" : {
+						"showName" : "红狮库管系统",
 						"moduleList" : [{
-								"module_title" : "采购扫单",
-								"module_id" : "procureScanner",
+								"module_title" : "入库业务",
+								"module_id" : "inStore",
+						}, {
+								"module_title" : "出库业务",
+								"module_id" : "outStore",
 						}]
 				},
 				"sale" : {
@@ -284,6 +287,9 @@ window.lang = (function(win, l) {
 				"carAmount" : "车\xa0\xa0\xa0\xa0\xa0\xa0数",
 				"searchWord" : "搜\xa0索\xa0词",
 				"pluralGrossWeight" : "复\xa0毛\xa0重",
+
+				/*procureScanner*/
+				"scan" : "扫\xa0\xa0\xa0\xa0\xa0\xa0描",
 		}];
 
 		l.getStr = function(langCode, strTag) {

@@ -24,6 +24,19 @@
 	background: rgba(35, 163, 107, 1);
 }
 
+/*库管样式*/
+.storage li:nth-child(3n+1) .tile-shadow {
+	background: rgba(40, 35, 160, 1);
+}
+
+.storage li:nth-child(3n+2) .tile-shadow {
+	background: rgba(30, 115, 210, 1);
+}
+
+.storage li:nth-child(3n+3) .tile-shadow {
+	background: rgba(35, 163, 107, 1);
+}
+
 .ultra-mask {
 	width: 100%;
 	height: 146px;

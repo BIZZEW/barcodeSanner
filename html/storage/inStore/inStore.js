@@ -95,9 +95,19 @@ function initPage() {
 										alert("Scanning failed: " + error);
 								});
 						},
-						
-						
-						
+						exitApp : function(param) {
+								UM.confirm({
+										title : "确认退出系统",
+										text : "之后进入系统需要重新验证登录",
+										btnText : ["取消", "确定"],
+										overlay : true,
+										duration : 2000,
+										cancle : function() {
+										},
+										ok : vue.okCallback
+								});
+						},
+
 						/*receiveQuery*/
 						goItemSelector : function(flag) {
 								roads.openWin(vue.dept, "itemSelector", vue.module_id + "/itemSelector/itemSelector.html", {

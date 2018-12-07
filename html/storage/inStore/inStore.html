@@ -8,7 +8,7 @@
 				<link rel="stylesheet" href="../../../css/mintui.css" />
 				<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_913882_c8t3blrxrev.css">
 				<link rel="stylesheet" href="../../util/util.css">
-				<link rel="stylesheet" href="procureScanner.css">
+				<link rel="stylesheet" href="inStore.css">
 
 				<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
 				<script type="text/javascript" src="../../../js/summer.js" ></script>
@@ -19,7 +19,7 @@
 				<script type="text/javascript" src="../../util/lang/lang.js" ></script>
 				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r77/three.min.js"></script>
 				<script type="text/javascript" src="../../../js/her.min.js" ></script>
-				<script type="text/javascript" src="procureScanner.js"></script>
+				<script type="text/javascript" src="inStore.js"></script>
 		</head>
 		<body>
 				<div class="loadingLayer"></div>
@@ -29,7 +29,7 @@
 				<div class="um-win" id="index" :class=module_id>
 						<div class="um-header header-bg">
 								<a href="#" class="um-back" @click="goback"></a>
-								<h3 class="title-color" v-text=module_id @click="secretDoor(4)" style="pointer-events: all;"></h3>
+								<h3 class="title-color" v-text=module_title @click="secretDoor(4)" style="pointer-events: all;"></h3>
 								<div class="um-header-btns"></div>
 						</div>
 
@@ -50,7 +50,7 @@
 																		<input id="cardNum" type="number" v-model="cardNum" :placeholder="langFunk('cardNumGuide')"/>
 																</div>
 														</div>
-														<button type="button" class="ultra-btn query " @click="letscan()" v-text="langFunk('bandText')" style="right: 10px"></button>
+														<button type="button" class="ultra-btn query " @click="letscan()" v-text="langFunk('scan')" style="right: 10px"></button>
 												</div>
 
 												<div class="um-label um-box-justify" style="border-top: 1px solid #f3f3f3;">

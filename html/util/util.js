@@ -4,8 +4,8 @@ window.roads = (function(win, r) {
 
 		r.G_BASE_SALE_URL = "html/sale/";
 		r.G_BASE_PROCURE_URL = "html/procure/";
-		r.G_BASE_SCANNER_URL = "html/scanner/";
 		r.G_BASE_LOGIN_URL = "html/login/";
+		r.G_BASE_STORAGE_URL = "html/storage/";
 		r.G_BASE_MENU_URL = "html/menu/";
 		r.G_BASE_UTIL_URL = "html/util/";
 
@@ -72,11 +72,11 @@ window.roads = (function(win, r) {
 				case "procure" :
 						baseUrl = r.G_BASE_PROCURE_URL;
 						break;
-				case "scanner" :
-						baseUrl = r.G_BASE_SCANNER_URL;
-						break;
 				case "login" :
 						baseUrl = r.G_BASE_LOGIN_URL;
+						break;
+				case "storage" :
+						baseUrl = r.G_BASE_STORAGE_URL;
 						break;
 				case "menu" :
 						baseUrl = r.G_BASE_MENU_URL;
@@ -104,6 +104,9 @@ window.roads = (function(win, r) {
 						break;
 				case "login" :
 						baseUrl = r.G_BASE_LOGIN_URL;
+						break;
+				case "storage" :
+						baseUrl = r.G_BASE_STORAGE_URL;
 						break;
 				case "menu" :
 						baseUrl = r.G_BASE_MENU_URL;

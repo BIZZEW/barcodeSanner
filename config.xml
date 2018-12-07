@@ -2,7 +2,7 @@
 
 <application>
 		<app_start>html/login/login.html</app_start>
-		<app_name>红狮扫单</app_name>
+		<app_name>红狮库管</app_name>
 		<project_name>scanbag</project_name>
 		<package_name>com.yonyou.scanbag</package_name>
 		<frame_name>summer-um</frame_name>

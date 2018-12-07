@@ -63,7 +63,7 @@ function initPage() {
 										clearTimeout(t);
 										polinit();
 								}, 500);
-								
+
 								var langTmp = summer.getStorage('lang');
 								this.lang = isEmpty(langTmp) ? 1 : langTmp;
 
@@ -88,7 +88,7 @@ function initPage() {
 								}
 						},
 						goMenu : function(tag) {
-								roads.openWin("scanner", "procureScanner", "procureScanner/procureScanner.html", {
+								roads.openWinSpecial("menu", "menu", "menu.html", {
 										"dept" : tag,
 										"usrname" : this.usrname
 								});
@@ -100,7 +100,6 @@ function initPage() {
 						},
 						// 提交表单
 						login : function() {
-								vue.loginStatus = 1;
 								//记住密码逻辑
 								summer.setStorage('remeberPD', this.remeberPD);
 								if (this.remeberPD) {
@@ -167,7 +166,7 @@ function initPage() {
 						},
 						loginStatus : function(val) {
 								if (val == 1) {
-										vue.goMenu("scanner");
+										vue.goMenu("storage");
 								}
 						},
 						ipLocation : function(val) {
