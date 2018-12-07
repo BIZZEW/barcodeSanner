@@ -283,7 +283,7 @@ input:focus, textarea:focus, select:focus {
 	z-index: 100;
 	left: 25%;
 	position: fixed;
-	top: 49% !important;
+	top: 45% !important;
 	bottom: 0px !important;
 	border-radius: 0;
 	padding: 4%;
