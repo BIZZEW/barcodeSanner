@@ -22,6 +22,8 @@ function isEmpty(obj) {
 var vue = null;
 
 function initPage() {
+		//document.addEventListener("deviceready", polinit(), false);
+
 		vue = new Vue({
 				el : '#index',
 				data : {
@@ -57,6 +59,11 @@ function initPage() {
 						},
 						//初始化页面
 						fillPage : function() {
+								var t = setTimeout(function() {
+										clearTimeout(t);
+										polinit();
+								}, 500);
+								
 								var langTmp = summer.getStorage('lang');
 								this.lang = isEmpty(langTmp) ? 1 : langTmp;
 
@@ -206,11 +213,13 @@ function initPage() {
 		})
 
 		document.addEventListener("deviceready", vue.fillPage(), false);
+}
 
+function polinit() {
 		var tmax_opts = {
 				delay : 0.5,
 				repeat : -1,
-				repeatDelay : 0.5,
+				repeatDelay : 2,
 				yoyo : true
 		};
 
@@ -232,7 +241,7 @@ function initPage() {
 		};
 
 		tmax_tl.staggerFromTo(polylion_shapes, polylion_duration, polylion_staggerFrom, polylion_staggerTo, polylion_stagger, 0);
-}
+};
 
 // reference to last opened menu
 var $lastOpened = false;
